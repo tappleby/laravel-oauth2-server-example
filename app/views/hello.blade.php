@@ -11,19 +11,19 @@
 @stop
 
 @section('content')
-
+  <h2 class="page-header">Select a user</h2>
 	<div class="row users">
 		@foreach($users as $user)
 		<div class="user col-lg-4">
-			<img class="img-circle" width="200" height="200" src="{{ $user->picture }}" >
+			<a class="btn-login" href="{{ URL::to('login/'.$user->id) }}" role="button"><img class="img-circle user-image" width="200" height="200" src="{{ $user->picture }}" ></a>
 			<h2>{{ $user->fullName() }} </h2>
-			<dl>
+			<?php /*<dl>
 				<dt>Email</dt>
 				<dd>{{ $user->email }}</dd>
 				<dt>Password</dt>
 				<dd>{{ $user->password_raw }}</dd>
 			</dl>
-			<p><a class="btn btn-default btn-login" href="{{ URL::to('login/'.$user->id) }}" role="button">Login »</a></p>
+			<p><a class="btn btn-default btn-login" href="{{ URL::to('login/'.$user->id) }}" role="button">Login »</a></p>*/ ?>
 		</div>
 		@endforeach
 	</div>

@@ -6,7 +6,7 @@
     $.oauthpopup({
       path: $(this).attr('href'),
       callback: function(){
-        $.get('/user_info', function(data){
+        $.get(OAuthDemo.url + '/user_info', function(data){
           $('#user_info').html(JSON.stringify(data));
         });
       }
