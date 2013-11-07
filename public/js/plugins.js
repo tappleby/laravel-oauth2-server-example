@@ -47,7 +47,7 @@
 
     options = $.extend({
       windowName: 'ConnectWithOAuth' // should not include space for IE
-      , windowOptions: 'location=0,status=0,width=600,height=275,top='+top+',left='+left
+      , windowOptions: 'location=0,status=0,width=500,height=275,top='+top+',left='+left
       , callback: function(){ window.location.reload(); }
     }, options);
 

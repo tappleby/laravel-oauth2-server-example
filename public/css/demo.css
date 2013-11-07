@@ -21,6 +21,18 @@ body {
     padding-top: 30px;
 }
 
+.oauth .media-body {
+    padding: 45px 15px;
+}
+
+.oauth .media-heading {
+    margin: 0 0 12px;
+}
+
+.oauth .user-image {
+    margin: 20px;
+}
+
 .oauth-actions {
     padding-top: 30px;
     text-align: right;

@@ -9,10 +9,10 @@
         data = JSON.parse(data);
         $('.alert').remove();
 
-        var prettyJson = JSON.stringify(data, undefined, 2);
-        $('<div class="alert alert-success"><strong>Oauth Response:</strong><pre>' + prettyJson + '</pre></div>').insertBefore('.page-header');
+        var alertType = data.error ? 'danger' : 'success'
+          , prettyJson = JSON.stringify(data, undefined, 2);
 
-//        console.log(JSON.parse(data));
+        $('<div class="alert alert-' + alertType +'"><strong>Oauth Response:</strong><pre>' + prettyJson + '</pre></div>').insertBefore('.page-header');
       }
     });
   });
