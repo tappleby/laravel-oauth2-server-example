@@ -24,18 +24,40 @@ Route::get('login/{id}', function($id)
 {
 	Auth::loginUsingId($id, true);
 
-	$authUrl = URL::to('oauth/authorize?client_id=example&redirect_uri='.URL::to('authorized').'&response_type=code&state=1234');
+	$state = str_random(40);
+
+	Session::put('oauth_state', $state);
+
+	$authUrl = URL::to('oauth/authorize?client_id=example&redirect_uri='.URL::to('authorized').'&response_type=code&state='.$state);
 
 	return Redirect::to($authUrl);
 });
 
 Route::get('/authorized', function()
 {
+	$sessionState = Session::remove('oauth_state');
+	$inputState = Input::get('state', null);
 	$code = Input::get('code', null);
 
-	if($code) {
 
+	if($code && $sessionState && $sessionState === $inputState) {
+		$request = Request::create( '/oauth/token', 'POST', array(
+				'grant_type' => 'authorization_code',
+				'code' => $code,
+				'client_id' => 'example',
+				'client_secret' => 'bin',
+				'redirect_uri' => URL::to('authorized')
+			)
+		);
+
+		$response = Route::dispatch($request);
+		$responseMessage = $response->getContent();
+	} else {
+		$responseMessage = json_encode(array(
+			'error' => true,
+			'error_message' => 'Error authorizing user.'
+		));
 	}
 
-	return View::make('window.close');
+	return View::make('window.close')->with('responseMessage', $responseMessage);
 });
