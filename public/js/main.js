@@ -5,10 +5,14 @@
 
     $.oauthpopup({
       path: $(this).attr('href'),
-      callback: function(){
-        $.get(OAuthDemo.url + '/user_info', function(data){
-          $('#user_info').html(JSON.stringify(data));
-        });
+      callback: function(err, data){
+        data = JSON.parse(data);
+        $('.alert').remove();
+
+        var prettyJson = JSON.stringify(data, undefined, 2);
+        $('<div class="alert alert-success"><strong>Oauth Response:</strong><pre>' + prettyJson + '</pre></div>').insertBefore('.page-header');
+
+//        console.log(JSON.parse(data));
       }
     });
   });
