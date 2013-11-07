@@ -25,3 +25,9 @@ body {
     padding-top: 30px;
     text-align: right;
 }
+
+.alert pre {
+    padding: 10px 0;
+    border: none;
+    background: none;
+}
