@@ -12,7 +12,13 @@ class OAuthController extends \Tappleby\OAuth2\Server\Controller {
 
   public function onPostAuthorized()
   {
-		return (bool)Input::get("authorized", false);
+	  $retVal = (bool)Input::get("authorized", false);
+
+	  if($retVal) {
+		  $retVal = Auth::user()->id;
+	  }
+
+		return $retVal;
   }
 
 }
